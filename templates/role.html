@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Role</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            width: 700px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .roles {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 25px;
+        }
+
+        .role-card {
+            width: 180px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .role-card img {
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .role-card p {
+            color:black;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .role-card:hover {
+            transform: scale(1.05);
+            border-color: #007bff;
+        }
+
+        .role-card.selected {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0,123,255,0.5);
+            background: #eef5ff;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            filter: blur(1px);
+        }
+
+        button.enabled {
+            background: #007bff;
+            color: white;
+        }
+        .theme-btn {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    padding: 8px 14px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+
+.theme-btn:hover {
+    background: #1e40af;
+}
+
+/* Dark mode styles */
+.dark body {
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+.dark .card,
+.dark .summary,
+.dark .question-card {
+    background: #1e293b;
+    color: #e5e7eb;
+}
+
+.dark .option {
+    border-color: #475569;
+}
+
+.dark .progress-bar {
+    background: #334155;
+}
+
+    </style>
+</head>
+
+<body>
+<div class="box">
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+
+    <h2 style="color:black">Select Your Role</h2>
+
+    <form method="post">
+        <input type="hidden" name="role" id="selectedRole">
+
+        <div class="roles">
+            <div class="role-card" onclick="selectRole('Data Scientist', this)">
+                <img src="/static/data_scientist.png">
+                <p>Data Scientist</p>
+            </div>
+
+            <div class="role-card" onclick="selectRole('Machine Learning Engineer', this)">
+                <img src="/static/ml_engineer.png">
+                <p>ML Engineer</p>
+            </div>
+
+            <div class="role-card" onclick="selectRole('Data Analyst', this)">
+                <img src="/static/data_analyst.png">
+                <p>Data Analyst</p>
+            </div>
+        </div>
+
+        <button type="submit" id="startBtn" disabled>Start Test</button>
+    </form>
+</div>
+
+<script>
+    function selectRole(role, element) {
+        // remove previous selection
+        let cards = document.querySelectorAll('.role-card');
+        cards.forEach(card => card.classList.remove('selected'));
+
+        // add selected class
+        element.classList.add('selected');
+
+        // set hidden input value
+        document.getElementById('selectedRole').value = role;
+
+        // enable button
+        let btn = document.getElementById('startBtn');
+        btn.disabled = false;
+        btn.classList.add("enabled");
+    }
+
+    const themeBtn = document.getElementById("themeBtn");
+
+function setThemeIcon() {
+    if (document.documentElement.classList.contains("dark")) {
+        themeBtn.innerText = "☀️";
+    } else {
+        themeBtn.innerText = "🌙";
+    }
+}
+
+function toggleTheme() {
+    const html = document.documentElement;
+    html.classList.toggle("dark");
+
+    if (html.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+
+    setThemeIcon();
+}
+
+window.onload = function() {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark");
+    }
+    setThemeIcon();
+};
+</script>
+
+</body>
+</html>

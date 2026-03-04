@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommended Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #eef2f7, #dbeafe);
+            padding: 30px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        h2 {
+            color: #1e293b;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .dark h2 {
+            color: #e5e7eb;
+        }
+
+        .theme-btn {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            padding: 8px 14px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .theme-btn:hover {
+            background: #1e40af;
+        }
+
+        .skill-section {
+            margin-bottom: 40px;
+        }
+
+        .skill-title {
+            font-size: 24px;
+            color: #2563eb;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2563eb;
+            text-transform: capitalize;
+        }
+
+        .dark .skill-title {
+            color: #60a5fa;
+            border-bottom-color: #60a5fa;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: #2563eb;
+        }
+
+        .dark .course-card {
+            background: #1e293b;
+            color: #e5e7eb;
+        }
+
+        .dark .course-card:hover {
+            border-color: #60a5fa;
+        }
+
+        .course-thumbnail {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 3px solid #2563eb;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        .dark .course-title {
+            color: #e5e7eb;
+        }
+
+        .course-instructor {
+            color: #4b5563;
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .dark .course-instructor {
+            color: #9ca3af;
+        }
+
+        .course-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .detail-item {
+            background: #eef2f7;
+            padding: 4px 10px;
+            border-radius: 20px;
+            color: #1e293b;
+        }
+
+        .dark .detail-item {
+            background: #334155;
+            color: #e5e7eb;
+        }
+
+        .rating {
+            color: #f59e0b;
+            font-weight: bold;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #2563eb;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .dark .price {
+            color: #60a5fa;
+        }
+
+        .explanation {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #334155;
+            border-left: 4px solid #2563eb;
+        }
+
+        .dark .explanation {
+            background: #0f172a;
+            color: #e5e7eb;
+            border-left-color: #60a5fa;
+        }
+
+        .course-link {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        .course-link:hover {
+            background: #1e40af;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #22c55e;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 30px 0;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #16a34a;
+        }
+
+        hr {
+            display: none;
+        }
+
+        /* Dark mode styles */
+        .dark body {
+            background: #0f172a;
+        }
+
+        .dark .back-btn {
+            background: #16a34a;
+        }
+
+        .dark .back-btn:hover {
+            background: #15803d;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+
+    <div class="container">
+        <div class="header">
+            <h2>📚 Recommended Courses</h2>
+            <p style="color: #4b5563; margin-top: 5px;">Personalized based on your assessment results</p>
+            <div class="dark" style="color: #9ca3af;"></div>
+        </div>
+        <!-- ================= ROLE LEVEL SECTION ================= -->
+
+{% if role_recommendations %}
+<div class="skill-section">
+    <h3 class="skill-title">
+        🎯 {{ overall_level }} Level {{ role }} Courses
+    </h3>
+
+            <div class="courses-grid">
+                {% for course in role_recommendations %}
+                <div class="course-card">
+                    <img class="course-thumbnail" src="{{ course.thumbnail }}" alt="{{ course.title }}">
+                    
+                    <div class="course-content">
+                        <div class="course-title">{{ course.title }}</div>
+                        <div class="course-instructor">👨‍🏫 {{ course.instructor }}</div>
+
+                        <div class="course-details">
+                            <span class="detail-item">📊 Level: {{ course.level }}</span>
+                            <span class="detail-item rating">⭐ {{ course.rating }}</span>
+                            <span class="detail-item">📝 {{ course.reviews }} reviews</span>
+                            <span class="detail-item">⏱️ {{ course.duration }} hrs</span>
+                        </div>
+
+                        <div class="price">₹{{ course.price }}</div>
+
+                        <a class="course-link" href="{{ course.url }}" target="_blank">
+                            🔗 Go to Course
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% for skill, courses in recommendations.items() %}
+        <div class="skill-section">
+            <h3 class="skill-title">{{ skill.title() }}</h3>
+            
+            <div class="courses-grid">
+                {% for course in courses %}
+                <div class="course-card">
+                    <img class="course-thumbnail" src="{{ course.thumbnail }}" alt="{{ course.title }}">
+                    
+                    <div class="course-content">
+                        <div class="course-title">{{ course.title }}</div>
+                        <div class="course-instructor">👨‍🏫 {{ course.instructor }}</div>
+                        
+                        <div class="course-details">
+                            <span class="detail-item">📊 Level: {{ course.level }}</span>
+                            <span class="detail-item rating">⭐ {{ course.rating }}</span>
+                            <span class="detail-item">📝 {{ course.reviews }} reviews</span>
+                            <span class="detail-item">⏱️ {{ course.duration }} hrs</span>
+                        </div>
+                        
+                        <div class="price">₹{{ course.price }}</div>
+                        
+                        <div class="explanation">
+                            {{ course.explanation }}
+                        </div>
+                        
+                        <a class="course-link" href="{{ course.url }}" target="_blank">🔗 Go to Course</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div style="text-align: center;">
+            <a href="/" class="back-btn">← Back to Role Selection</a>
+        </div>
+    </div>
+
+    <script>
+        const themeBtn = document.getElementById("themeBtn");
+
+        function setThemeIcon() {
+            if (document.documentElement.classList.contains("dark")) {
+                themeBtn.innerText = "☀️";
+            } else {
+                themeBtn.innerText = "🌙";
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle("dark");
+
+            if (html.classList.contains("dark")) {
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
+
+            setThemeIcon();
+        }
+
+        window.onload = function() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark");
+            }
+            setThemeIcon();
+        };
+    </script>
+</body>
+</html>

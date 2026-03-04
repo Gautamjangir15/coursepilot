@@ -1,0 +1,16 @@
+question_id,role,skill,difficulty,question_type,question_text,options,correct_answer,max_score,expected_time_sec
+DA_Q1,Data Analyst,SQL,easy,mcq,Which SQL clause is used to sort query results?,"['GROUP BY', 'WHERE', 'ORDER BY', 'HAVING']",['ORDER BY'],1,30
+DA_Q2,Data Analyst,SQL,medium,mcq,Which SQL function returns the number of rows?,"['SUM', 'COUNT', 'AVG', 'TOTAL']",['COUNT'],2,30
+DA_Q3,Data Analyst,SQL,hard,checklist,Which negatively impact SQL performance?,"['Missing indexes', 'Unnecessary subqueries', 'SELECT *', 'Filtering early']","['Missing indexes', 'Unnecessary subqueries', 'SELECT *']",3,90
+DA_Q4,Data Analyst,Python,easy,mcq,Which Python library is most used for data analysis?,"['TensorFlow', 'Pandas', 'Flask', 'PyTorch']",['Pandas'],1,30
+DA_Q5,Data Analyst,Python,medium,mcq,What does df.groupby('category')['sales'].mean() do?,"['Count sales', 'Total sales', 'Average sales', 'Sort categories']",['Average sales'],2,45
+DA_Q6,Data Analyst,Python,hard,checklist,Which operations are part of data cleaning?,"['Remove duplicates', 'Handle missing values', 'Type conversion', 'Train model']","['Remove duplicates', 'Handle missing values', 'Type conversion']",3,90
+DA_Q7,Data Analyst,Statistics,easy,mcq,Which statistic represents the middle value?,"['Mean', 'Mode', 'Median', 'Variance']",['Median'],1,30
+DA_Q8,Data Analyst,Statistics,medium,mcq,Which spread measure is least affected by outliers?,"['Variance', 'Std Dev', 'Range', 'IQR']",['IQR'],2,45
+DA_Q9,Data Analyst,Statistics,hard,checklist,When should median be preferred over mean?,"['Outliers present', 'Skewed data', 'Symmetric data', 'Normal distribution']","['Outliers present', 'Skewed data']",3,90
+DA_Q10,Data Analyst,Data Visualization,easy,mcq,Which chart best shows trends over time?,"['Bar', 'Line', 'Pie', 'Scatter']",['Line'],1,30
+DA_Q11,Data Analyst,Data Visualization,medium,mcq,Which chart compares parts of a whole?,"['Line', 'Histogram', 'Pie', 'Boxplot']",['Pie'],2,30
+DA_Q12,Data Analyst,Data Visualization,hard,checklist,Which improve visualization clarity?,"['Axis labels', 'Avoid extra colors', 'Clear titles', 'Overloading charts']","['Axis labels', 'Avoid extra colors', 'Clear titles']",3,90
+DA_Q13,Data Analyst,Business Understanding,easy,mcq,Primary goal of data analysis in business?,"['Build models', 'Write code', 'Support decisions', 'Reduce data size']",['Support decisions'],1,30
+DA_Q14,Data Analyst,Business Understanding,medium,mcq,What should be clarified before analysis?,"['Language', 'Tool', 'Business question', 'Database']",['Business question'],2,45
+DA_Q15,Data Analyst,Business Understanding,hard,checklist,What should analysts ask before starting?,"['Decision supported', 'Key metrics', 'Data freshness', 'ML algorithm']","['Decision supported', 'Key metrics', 'Data freshness']",3,90

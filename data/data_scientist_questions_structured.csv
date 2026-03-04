@@ -1,0 +1,16 @@
+question_id,role,skill,difficulty,question_type,question_text,options,correct_answer,max_score,expected_time_sec
+DS_Q1,Data Scientist,Python,easy,mcq,"What is the output of the following code? x=[1,2,3]; y=x; y.append(4); print(x)","['[1,2,3]', '[1,2,3,4]', 'Error', 'None']","['[1,2,3,4]']",1,45
+DS_Q2,Data Scientist,Python,medium,mcq,Which Python object is immutable?,"['list', 'dict', 'set', 'tuple']",['tuple'],2,30
+DS_Q3,Data Scientist,Python,hard,checklist,Which operations have O(1) average time complexity in Python?,"['Dictionary key lookup', 'Appending to a list', 'Insert in middle', 'Sorting list']","['Dictionary key lookup', 'Appending to a list']",3,90
+DS_Q4,Data Scientist,Statistics,easy,mcq,What does standard deviation measure?,"['Central tendency', 'Spread of data', 'Skewness', 'Correlation']",['Spread of data'],1,30
+DS_Q5,Data Scientist,Statistics,medium,checklist,Which statements about mean are true?,"['Affected by outliers', 'Can be negative', 'Always equals median', 'Measures spread']","['Affected by outliers', 'Can be negative']",2,60
+DS_Q6,Data Scientist,Statistics,hard,mcq,"If a dataset is right-skewed, which is usually true?","['Mean < Median', 'Mean = Median', 'Mean > Median', 'Cannot determine']",['Mean > Median'],3,45
+DS_Q7,Data Scientist,Machine Learning,easy,mcq,Which of the following is a supervised learning problem?,"['Customer segmentation', 'Dimensionality reduction', 'Spam classification', 'Topic modeling']",['Spam classification'],1,30
+DS_Q8,Data Scientist,Machine Learning,medium,mcq,What problem does regularization primarily help prevent?,"['Underfitting', 'Data leakage', 'Overfitting', 'Class imbalance']",['Overfitting'],2,30
+DS_Q9,Data Scientist,Machine Learning,hard,checklist,Which situations indicate high bias?,"['High training error', 'Very low training error', 'Training and validation error similar', 'Large train-validation gap']","['High training error', 'Training and validation error similar']",3,90
+DS_Q10,Data Scientist,SQL,easy,mcq,Which SQL clause filters rows before aggregation?,"['HAVING', 'WHERE', 'GROUP BY', 'ORDER BY']",['WHERE'],1,30
+DS_Q11,Data Scientist,SQL,medium,mcq,Which SQL clause filters aggregated results?,"['WHERE', 'GROUP BY', 'HAVING', 'LIMIT']",['HAVING'],2,30
+DS_Q12,Data Scientist,SQL,hard,checklist,Which factors increase query execution time on large tables?,"['Missing indexes', 'Using SELECT *', 'Using LIMIT', 'Filtering before aggregation']","['Missing indexes', 'Using SELECT *']",3,90
+DS_Q13,Data Scientist,Data Wrangling,easy,mcq,Which Python library is most commonly used for data manipulation?,"['NumPy', 'Matplotlib', 'Pandas', 'Seaborn']",['Pandas'],1,30
+DS_Q14,Data Scientist,Data Wrangling,medium,checklist,Which are valid ways to handle missing values?,"['Drop rows', 'Fill with mean/median', 'Model-based imputation', 'Always ignore']","['Drop rows', 'Fill with mean/median', 'Model-based imputation']",2,60
+DS_Q15,Data Scientist,Data Wrangling,hard,mcq,Why is data leakage dangerous?,"['Increases training time', 'Causes underfitting', 'Leads to optimistic performance', 'Increases variance']",['Leads to optimistic performance'],3,45

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #eef2f7, #dbeafe);
+            padding: 30px;
+        }
+
+        .summary {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .score {
+            font-size: 28px;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: {{ (score / total) * 100 }}%;
+            background: #2563eb;
+        }
+
+        .meta {
+            color: #555;
+        }
+
+        .question-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 8px solid #ccc;
+        }
+
+        .correct {
+            border-left-color: #22c55e;
+        }
+
+        .wrong {
+            border-left-color: #ef4444;
+        }
+
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .option {
+            margin-left: 20px;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+
+        .user-answer {
+            background: #fdcbcb;
+            font-weight: bold;
+            display: inline-block;
+            color:#880808;
+        }
+
+        .correct-answer {
+            background: #dcfce7;
+            color: #166534;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .badge {
+            float: right;
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 12px;
+        }
+
+        .badge.correct {
+            background: #22c55e;
+        }
+
+        .badge.wrong {
+            background: #ef4444;
+        }
+        .retake-btn {
+            margin-top: 20px;
+            padding: 12px 35px;
+            background: #22c55e;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .retake-btn:hover {
+            background: #16a34a;
+        }
+
+        .courses-btn {
+    margin-top: 20px;
+    padding: 12px 35px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 15px;
+}
+
+.courses-btn:hover {
+    background: #1e40af;
+}
+
+        .theme-btn {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    padding: 8px 14px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+
+.theme-btn:hover {
+    background: #1e40af;
+}
+
+/* Dark mode styles */
+.dark body {
+    background: #0f172a;
+    color: white;
+}
+
+.dark .card,
+.dark .summary,
+.dark .question-card {
+    background: #1e293b;
+    color: white;
+}
+
+.dark .option {
+    border-color: #475569;
+}
+
+.dark .progress-bar {
+    background: #334155;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="summary">
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    <h2>Assessment Result</h2>
+    <div class="score">{{ score }} / {{ total }}</div>
+
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <p class="meta"><b>Time Taken:</b> <span id="timeTaken"></span></p>
+</div>
+
+
+
+{% for r in results %}
+<div class="question-card {% if r.is_correct %}correct{% else %}wrong{% endif %}">
+    
+    <span class="badge {% if r.is_correct %}correct{% else %}wrong{% endif %}">
+        {% if r.is_correct %}Correct{% else %}Wrong{% endif %}
+    </span>
+
+    <div class="question-title">
+        Q{{ loop.index }}. {{ r.question }}
+    </div>
+
+    <div>
+        <div class="section-title">Your Answer:</div>
+        {% for ua in r.user_answer %}
+        <div class="option user-answer">✔ {{ ua }}</div>
+        {% endfor %}
+    </div>
+    
+    <div>
+        <div class="section-title">Correct Answer:</div>
+        {% for ca in r.correct_answer %}
+        <div class="option correct-answer">✔ {{ ca }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+<div style="text-align:center; margin-top:20px;">
+    <a href="/">
+        <button class="retake-btn">Retake Test</button>
+    </a>
+
+    <a href="/courses">
+        <button class="courses-btn">Recommend  Courses</button>
+    </a>
+</div>
+
+
+</body>
+<script>
+    const totalSecondsRaw = {{ time_taken }};
+    const totalSeconds = Math.floor(totalSecondsRaw); // remove decimals
+
+    let displayTime = "";
+
+    if (totalSeconds < 60) {
+        displayTime = totalSeconds + " sec";
+    } else {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+
+        displayTime = minutes + " min " + String(seconds).padStart(2, "0") + " sec";
+    }
+
+    document.getElementById("timeTaken").innerText = displayTime;
+
+
+    const themeBtn = document.getElementById("themeBtn");
+    function setThemeIcon() {
+        if (document.documentElement.classList.contains("dark")) {
+            themeBtn.innerText = "☀️";
+        } else {
+            themeBtn.innerText = "🌙";
+        }
+    }
+
+    function toggleTheme() {
+        const html = document.documentElement;
+        html.classList.toggle("dark");
+
+        if (html.classList.contains("dark")) {
+            localStorage.setItem("theme", "dark");
+        } else {
+            localStorage.setItem("theme", "light");
+        }
+
+        setThemeIcon();
+    }
+
+    window.onload = function() {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+        setThemeIcon();
+    };
+</script>
+</html>
