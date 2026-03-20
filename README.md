@@ -224,15 +224,9 @@ SQL Score
 
 # 📸 Screenshots
 
-Add screenshots here for better presentation.
+<img width="1881" height="945" alt="image" src="https://github.com/user-attachments/assets/97e7f9e1-6155-40b0-8564-a4ace009367d" />
+![image](https://github.com/user-attachments/assets/2a33d925-991e-45fa-99be-a415fbca9d14)
 
-Example:
-
-```
-images/
-assessment_page.png
-course_recommendations.png
-```
 
 ---
 
