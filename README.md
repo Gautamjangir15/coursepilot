@@ -12,6 +12,8 @@ The system uses **weighted skill scoring and Bayesian ranking** to recommend the
 
 ```
 https://coursepilot.pythonanywhere.com/
+
+![VideoProject1-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ee83ba92-7e20-4479-a8ac-0cdb298f3f3e)
 ```
 
 ---
